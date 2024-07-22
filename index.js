@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const path = require("path");
 
 const app = express();
 const port = 3000;
@@ -24,12 +23,9 @@ const PotholeSchema = new mongoose.Schema({
 const Pothole = mongoose.model("Pothole", PotholeSchema);
 
 // Middleware
-app.use(cors());
+app.use(cors()); // Add this line to enable CORS
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-// Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, "public")));
 
 // POST endpoint to receive pothole data
 app.post("/api/pothole", async (req, res) => {
